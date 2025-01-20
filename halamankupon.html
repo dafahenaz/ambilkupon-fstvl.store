@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencetakan Kupon</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background-color: #F5F5F5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            box-shadow: #077be7;
+        }
+        .container {
+            background: #f7f5f5;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 360px;
+            padding: 20px;
+        }
+        .header {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            color: #077be7;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: #182029;
+            color: #FFFFFF;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            text-align: center;
+        }
+        .card h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .card p {
+            margin: 8px 0 0;
+            font-size: 14px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #077be7;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #077be7;
+            border-radius: 4px;
+            font-size: 14px;
+            box-shadow: #077be7;
+        }
+        input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007BFF;
+            color: #FFFFFF;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:active {
+            background: #004494;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Lengkapi Data Pencetakan Kupon</div>
+        <div class="card">
+            <h2>Cetak Kupon</h2>
+            <p>Nomor Handphone<br>+62###-###-####</p>
+        </div>
+        <form id="kuponForm">
+            <label for="nama">Nama Lengkap Nasabah</label>
+            <input type="text" id="nama" name="nama" placeholder="Nama Lengkap" required>
+
+            <label for="handphone">Nomor Handphone</label>
+            <input type="tel" id="handphone" name="handphone" placeholder="Masukkan Nomor Handphone" required>
+
+            <label for="saldo">Saldo Akhir</label>
+            <input type="text" id="saldo" name="saldo" placeholder="Rp" required>
+
+            <button type="submit">Lanjut</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('kuponForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form submit default
+
+            // Ambil data dari form
+            const nama = document.getElementById('nama').value;
+            const handphone = document.getElementById('handphone').value;
+            const saldo = document.getElementById('saldo').value;
+
+            // Validasi sederhana
+            if (!nama || !handphone || !saldo) {
+                alert('Semua kolom harus diisi!');
+                return;
+            }
+
+            // Animasi tombol
+            const button = event.target.querySelector('button');
+            button.textContent = 'Memproses...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.textContent = 'Lanjut';
+                button.disabled = false;
+
+                // Tampilkan pesan sukses
+                alert(`Data berhasil dikirim!\nNama: ${nama}\nHandphone: ${handphone}\nSaldo: Rp${saldo}`);
+
+                // Reset form
+                document.getElementById('kuponForm').reset();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
